@@ -1,0 +1,34 @@
+{
+  "node_name": "consul",
+  "server": true,
+  "ui_config": {
+    "enabled": true
+  },
+  "datacenter":"LOCAL",
+  "data_dir": "/consul/data",
+  "addresses": {
+    "http": "0.0.0.0"
+  },
+  "bind_addr": "0.0.0.0",
+  "client_addr": "0.0.0.0",
+  "log_level": "INFO",
+  "verify_incoming": false,
+  "verify_outgoing": false,
+  "verify_server_hostname": false,
+
+  "service": {
+    "id": "consul",
+    "name": "consul",
+    "tags": [
+      "traefik.enable=true",
+      "traefik.http.routers.consul.entrypoints=web",
+      "traefik.http.routers.consul.rule=Host(`consul.redelocal`)",
+      "traefik.http.services.consul.loadbalancer.server.port=8500"
+    ],
+    "port": 8500,
+    "meta": {
+      "meta": "Consul Server"
+    }
+  }
+}
+

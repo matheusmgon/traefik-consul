@@ -1,0 +1,16 @@
+{
+  "node_name": "client-2",
+  "data_dir": "/consul/data",
+  "datacenter":"LOCAL",
+  "retry_join": ["consul-server"],
+  "rejoin_after_leave": true,
+  "service": {
+    "name": "client",
+    "tags": ["Consul client"]
+  },
+  "verify_incoming": false,
+  "verify_outgoing": false,
+  "verify_server_hostname": false,
+
+  "domain": "local"
+} 

@@ -1,0 +1,76 @@
+version: '3.2'
+
+
+networks:
+    consul:
+      driver: bridge
+
+
+services:
+
+    traefik:
+        image: traefik
+        restart: always
+        container_name: traefik
+        command:
+            - "--log.level=INFO"
+            - "--api.dashboard=true"
+            - "--accesslog=false"
+            - "--providers.consulcatalog=true"
+            - "--providers.consulcatalog.exposedbydefault=false"
+            - "--providers.consulcatalog.endpoint.address=consul-server:8500"
+            - "--providers.consulcatalog.endpoint.datacenter=local"
+            - "--providers.consulcatalog.prefix=traefik"
+            - "--entrypoints.web.address=:80"
+        ports:
+            - 80:80
+        networks:
+            - consul
+        stdin_open: true
+        tty: true
+        privileged: true
+                                                                                                                      
+    consul-server:
+        image: hashicorp/consul:1.9.5
+        container_name: consul-server
+        hostname: consul-server
+        volumes: 
+            - ./consul/consul-server/config/server.json:/consul/config/server.json:rw
+        networks:
+            - consul
+        restart: always
+        command: 'agent --bootstrap-expect=1 -config-file=/consul/config/server.json'
+
+    consul-client-1:
+        image: hashicorp/consul:1.9.5
+        container_name: consul-client-1
+        hostname: consul-client-1
+        restart: always
+        volumes:
+            - ./consul/consul-client1/config/client.json:/consul/config/client.json:rw
+        networks:
+            - consul
+        command: "agent -config-file=/consul/config/client.json"
+
+
+    consul-client-2:
+        image: hashicorp/consul:1.9.5
+        container_name: consul-client-2
+        hostname: consul-client-2
+        restart: always
+        volumes:
+            - ./consul/consul-client2/config/client.json:/consul/config/client.json:rw
+        networks:
+            - consul
+        command: "agent -config-file=/consul/config/client.json"
+
+    consul-client-3:
+        image: hashicorp/consul:1.9.5
+        container_name: consul-client-3
+        hostname: consul-client-3
+        restart: always
+        volumes:
+            - ./consul/consul-client3/config/client.json:/consul/config/client.json:rw
+        networks:
+            - consul
+        command: "agent -config-file=/consul/config/client.json"
