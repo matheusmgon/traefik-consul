@@ -17,13 +17,13 @@
   "verify_server_hostname": false,
 
   "service": {
-    "id": "consul",
-    "name": "consul",
+    "id": "consul-ui",
+    "name": "consul-ui",
     "tags": [
       "traefik.enable=true",
-      "traefik.http.routers.consul.entrypoints=web",
-      "traefik.http.routers.consul.rule=Host(`consul.redelocal`)",
-      "traefik.http.services.consul.loadbalancer.server.port=8500"
+      "traefik.http.routers.consul-ui.entrypoints=web",
+      "traefik.http.routers.consul-ui.rule=Host(`consul.redelocal`)",
+      "traefik.http.services.consul-ui.loadbalancer.server.port=8500"
     ],
     "port": 8500,
     "meta": {
@@ -31,4 +31,3 @@
     }
   }
 }
-
