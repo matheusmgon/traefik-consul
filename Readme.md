@@ -16,7 +16,8 @@ Traefik is a powerful tool written in GO.
 This tool has the power to intelligently balance loads.
 Traefik has 2 ways of configuration:
 Statics and Dynamics
-In this project we will use dinalica, because it's cooler
+
+In this project we will use dynamic, because it's cooler
 
 [Traefik Link](https://traefik.io "Trafik Link")
 
@@ -27,6 +28,8 @@ With this tool, we can do a number of things:
 - Service Mesh
 - Service Discovery
 - KV Store
+
+
 In this project we are going to use Consul so that traefik consults the taguiated catalog of services and automatically discovers new hosts to balance the load
 
 [Consul Link](https://consul.io "Consul Link")
